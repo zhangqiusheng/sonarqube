@@ -1,0 +1,36 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+allprojects {
+    group = 'com.gridsum.tvdtracker'
+    version = '1.0.0.0'
+}
+apply plugin: "org.sonarqube"
+
+buildscript {
+    repositories {
+        jcenter()
+        //sonar
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.2'
+        //sonar
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.0.1"
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            name "gridsum"
+            url "http://maven.gridsum.com:8081/nexus/content/groups/public/"
+        }
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

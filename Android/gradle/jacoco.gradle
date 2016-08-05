@@ -1,0 +1,22 @@
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.7.6.201602180812"
+}
+
+test {
+    jacoco {
+        append = false
+        destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
+        classDumpFile = file("$buildDir/jacoco/classpathdumps")
+    }
+}
+
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/reports/jacoco"
+    }
+}

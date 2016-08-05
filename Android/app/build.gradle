@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+// recommend to specify the flavor once and dynamically adapt paths to it
+//def flavor = "develop" // flavor we want to have tested. Should be static
+//def Flavor = "Develop" // flavor again, but starting with upper case
+
+sonarqube {
+    properties {
+        def libraries = project.android.sdkDirectory.getPath() + "/platforms/android-23/android.jar," +
+                "build/intermediates/exploded-aar/**/classes.jar"
+
+        property "sonar.sourceEncoding","UTF-8"
+        property "sonar.sources","."
+        property "sonar.binaries", "build/intermediates/classes/debug"
+        property "sonar.libraries", libraries
+        property "sonar.java.binaries", "build/intermediates/classes/debug"
+        property "sonar.java.libraries", libraries
+
+//        property "sonar.tests", "src/test/java" // where the tests are located
+//        property "sonar.java.test.binaries", "build/intermediates/classes/debug"
+//        property "sonar.java.test.libraries", libraries
+
+        property "sonar.exclusions","build/**,**/*.png"
+        property "sonar.import_unknown_files", true
+        property "sonar.android.lint.report", "./build/outputs/lint-results-debug.xml"
+    }
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.gridsum.ottracker_android"
+        minSdkVersion 9
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+        lintOptions {
+            abortOnError false
+        }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+    compile(project(':tvdtracker')){
+        exclude group: 'com.fasterxml.jackson.core'
+        exclude group: 'com.squareup.okhttp'
+    }
+}
