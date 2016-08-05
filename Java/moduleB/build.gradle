@@ -1,0 +1,24 @@
+
+dependencies {
+    compile 'net.sourceforge.jchardet:jchardet:1.0'
+    compile 'com.googlecode.juniversalchardet:juniversalchardet:1.0.3'
+    compile 'org.apache.ant:ant:1.8.2'
+
+    compile project(':moduleA')
+
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.demo.moduleA'
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+
+
+
+
