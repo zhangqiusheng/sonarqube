@@ -34,10 +34,6 @@ subprojects {
 
 
     repositories {
-        maven {
-            name "gridsum"
-            url "http://maven.gridsum.com:8081/nexus/content/groups/public/"
-        }
         mavenCentral()
     }
 
