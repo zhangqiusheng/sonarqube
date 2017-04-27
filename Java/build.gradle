@@ -1,5 +1,5 @@
 allprojects {
-    group = 'com.gridsum.tvdDownload'
+    group = 'com.company.demo'
     version = '1.0'
 }
 
