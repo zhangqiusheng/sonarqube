@@ -22,11 +22,7 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
-        maven {
-            name "gridsum"
-            url "http://maven.gridsum.com:8081/nexus/content/groups/public/"
-        }
+        jcenter()        
         mavenCentral()
     }
 }
